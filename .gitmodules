@@ -1,0 +1,12 @@
+[submodule "3rdparty/fortune"]
+	path = 3rdparty/fortune
+	url = https://github.com/MinatoAquaCrews/nonebot_plugin_fortune.git
+[submodule "3rdparty/wordcloud"]
+	path = 3rdparty/wordcloud
+	url = https://github.com/he0119/nonebot-plugin-wordcloud.git
+[submodule "3rdparty/shindan"]
+	path = 3rdparty/shindan
+	url = https://github.com/MeetWq/nonebot-plugin-shindan.git
+[submodule "3rdparty/petpet"]
+	path = 3rdparty/petpet
+	url = https://github.com/MeetWq/nonebot-plugin-petpet.git

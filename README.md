@@ -1,22 +1,24 @@
 ## MyQueen
 
-MyQueen 是一个基于 nonebot 的机器人。
+MyQueen（麦昆）是一个基于 nonebot 的机器人，支持 OneBot 接口。
 
 ### 功能
 
-1. 复读姬  我自己写的
-2. 抽签/今日运势  [插件链接](https://github.com/MinatoAquaCrews/nonebot_plugin_fortune)
-3. 词云  [插件链接](https://github.com/he0119/nonebot-plugin-wordcloud)
-4. ShindanMaker  [插件链接](https://github.com/MeetWq/nonebot-plugin-shindan)
-5. 头像表情包  [插件链接](https://github.com/MeetWq/nonebot-plugin-petpet)
-6. 表情包制作  [插件链接](https://github.com/MeetWq/nonebot-plugin-petpet)       
+1. 复读姬
+2. [抽签/今日运势](https://github.com/MinatoAquaCrews/nonebot_plugin_fortune)
+3. [词云](https://github.com/he0119/nonebot-plugin-wordcloud)
+4. [ShindanMaker](https://github.com/MeetWq/nonebot-plugin-shindan)
+5. [头像表情包](https://github.com/MeetWq/nonebot-plugin-petpet)
+6. [表情包制作](https://github.com/MeetWq/nonebot-plugin-petpet)
 
-具体的可以在群里发"help"或"帮助"查看
+具体内容可以使用 `help` 或 `帮助` 指令查看。
 
-### 使用方法
+### 部署
 
 ```bash
-git clone 
+git clone --recursive https://github.com/RickSchanze/MyQueen.git
+cd MyQueen
+pip install -r requirements.txt
+playwright install-deps  # optional
+python bot.py
 ```
-clone   运行bot.py    连接cq-http      开始使用麦昆
-~~（前提是你得有我装的一系列库,请自行查找安装）~~

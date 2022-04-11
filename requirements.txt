@@ -1,0 +1,14 @@
+nonebot2==2.0.0b2
+nonebot_adapter_onebot==2.0.0b1
+nonebot_plugin_apscheduler==0.1.2
+Pillow==9.1.0
+nonebot_plugin_chatrecorder==0.1.5
+jieba==0.42.1
+emoji==1.7.0
+wordcloud==1.8.1
+Jinja2==3.1.1
+beautifulsoup4==4.11.1
+nonebot_plugin_htmlrender==0.0.4.6
+aiocache==0.11.1
+imageio==2.16.2
+opencv_contrib_python==4.5.5.64

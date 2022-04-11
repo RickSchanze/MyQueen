@@ -37,8 +37,8 @@ def session_to_group_id(session):  # 将 session 信息转变为群号
     return session.split("_")[1]
 
 def message_to_qq(qq):  # 命令后面 at 人的时候，获取那个人的 QQ
-    if len(qq.split(""=")) == 2:
-        return qq.split(""=")[1][:-2]
+    if len(qq.split("=")) == 2:
+        return qq.split("=")[1][:-2]
     else:
         return 0
 
