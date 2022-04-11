@@ -7,7 +7,7 @@
 4. ShindanMaker  [插件链接](https://github.com/MeetWq/nonebot-plugin-shindan)
 5. 头像表情包  [插件链接](https://github.com/MeetWq/nonebot-plugin-petpet)
 6. 表情包制作  [插件链接](https://github.com/MeetWq/nonebot-plugin-petpet)       
-<br>具体的可以在群里发"help"或"帮助"查看
+具体的可以在群里发"help"或"帮助"查看
 # 使用方法
 clone   运行bot.py    连接cq-http      开始使用麦昆
 ~~（前提是你得有我装的一系列库,请自行查找安装）~~
