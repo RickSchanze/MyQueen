@@ -1,7 +1,7 @@
 # 关于MyQueen(麦昆)
 麦昆是一个机器人，基于**nonebot+gocqhttp**
 # 关于麦昆的功能
-1. 复读姬  我自己写的
+1. 复读姬  我自己写的位于: **/src/plugins/askandquestion/**
 2. 抽签/今日运势  [插件链接](https://github.com/MinatoAquaCrews/nonebot_plugin_fortune)
 3. 词云  [插件链接](https://github.com/he0119/nonebot-plugin-wordcloud)
 4. ShindanMaker  [插件链接](https://github.com/MeetWq/nonebot-plugin-shindan)
