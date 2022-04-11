@@ -1,8 +1,8 @@
-## MyQueen(麦昆)
+## MyQueen
 
-麦昆是一个机器人，基于**nonebot+gocqhttp**
+MyQueen 是一个基于 nonebot 的机器人。
 
-### 关于麦昆的功能
+### 功能
 
 1. 复读姬  我自己写的
 2. 抽签/今日运势  [插件链接](https://github.com/MinatoAquaCrews/nonebot_plugin_fortune)
@@ -15,5 +15,8 @@
 
 ### 使用方法
 
+```bash
+git clone 
+```
 clone   运行bot.py    连接cq-http      开始使用麦昆
 ~~（前提是你得有我装的一系列库,请自行查找安装）~~
