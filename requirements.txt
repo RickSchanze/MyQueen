@@ -1,0 +1,11 @@
+httpx==0.22.0
+nonebot==1.9.1
+nonebot_plugin_apscheduler==0.1.2
+nonebot_plugin_chatrecorder==0.1.5
+nonebot_plugin_code==0.0.4
+nonebot_plugin_fortune==0.4.3
+nonebot_plugin_memes==0.2.3.1
+nonebot_plugin_petpet==0.2.13
+nonebot_plugin_shindan==0.2.2
+nonebot_plugin_wordcloud==0.1.0
+pydantic==1.9.0
