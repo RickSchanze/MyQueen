@@ -4,6 +4,9 @@ from nonebot.adapters import Bot, Event
 from nonebot.typing import T_State
 from nonebot.permission import SUPERUSER
 import json
+import sys
+from nonebot.plugin import export
+
 
 
 class GlobalDialog:
@@ -26,17 +29,14 @@ now_path = os.path.dirname(__file__)
 
 permission_path = os.path.join(now_path, os.path.pardir)
 
+sys.path.append(permission_path)
+
 permission_file = os.path.join(permission_path, "permission.json")
 
-# 读取权限文件
-with open(permission_file, "r") as per:
-    permission = json.load(per)
-    if "words_managers" not in permission.keys():
-        permission["words_managers"] = []
-    if "supermanager" not in permission.keys():
-        permission["words_supermanager"] = []
+from permission import permission
 
 globalDig = GlobalDialog().global_msg
+
 
 
 def message_to_qq(qq):              # 命令后面at人的时候，获取那个人的QQ
@@ -55,8 +55,8 @@ async def add_manager_handle(event: Event, bot: Bot):
     user_id = event.get_user_id()
     if str(user_id) in permission["supermanager"]:
         text = message_to_qq(event.raw_message)
-        if text:
-            permission["words_managers"].append(text)
+        if text not in permission["words_managers"].keys():
+            permission["words_managers"][text] = "1"
             with open(permission_file, 'w', encoding='utf-8') as f:
                 json.dump(permission, fp=f, indent=4, ensure_ascii=False)
 
@@ -72,8 +72,8 @@ async def remove_manager_handle(event: Event, bot: Bot):
     user_id = event.get_user_id()
     if str(user_id) in permission["supermanager"]:
         text = message_to_qq(event.raw_message)
-        if text:
-            del permission["words_managers"][permission["words_managers"].index(text)]
+        if text in permission["words_managers"].keys():
+            del permission["words_managers"][text]
             with open(permission_file, 'w', encoding='utf-8') as f:
                 json.dump(permission, fp=f, indent=4, ensure_ascii=False)
 
@@ -159,3 +159,4 @@ async def sick_handle(event: Event, bot: Bot):
     qq = message_to_qq(event.raw_message)
     group_id = event.group_id
     await bot.call_api("send_group_msg", message=f"[CQ:at,qq={qq}]的脚小小的香香的，不像手经常使用来得灵活，但有一种独特的可爱的笨拙，嫩嫩的脚丫光滑细腻，凌莹剔透，看得见皮肤下面细细的血管与指甲之下粉白的月牙。再高冷的女生小脚也是敏感的害羞的，轻轻挠一挠，她就摇身一变成为娇滴滴的女孩，脚丫像是一把钥匙，轻轻掌握它就能打开女孩子的心灵。", group_id=int(group_id), auto_escape=False)
+
