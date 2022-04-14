@@ -6,7 +6,8 @@ from nonebot import on_command, on_keyword
 from nonebot.adapters import Bot, Event, Message
 from nonebot.permission import SUPERUSER
 import json
-import os
+import os, sys
+from nonebot.plugin import require
 # 变量定义环节
 now_path = os.path.dirname(__file__)
 index_path = os.path.join(now_path, "index.txt")
@@ -16,15 +17,13 @@ permission_path = os.path.join(now_path, os.path.pardir)
 
 permission_file = os.path.join(permission_path, "permission.json")
 
+sys.path.append(permission_path)
+
+from permission import permission
+
+
 # 读取权限文件
-with open(permission_file, "r") as per:
-    permission = json.load(per)
-    if "setu_managers" not in permission.keys():
-        permission["setu_managers"] = []
-    if "supermanager" not in permission.keys():
-        permission["words_supermanager"] = []
-    if "groupSetuAvailable" not in permission.keys():
-        permission["groupSetuAvailable"] = {}
+
 
 
 def message_to_qq(qq):              # 命令后面at人的时候，获取那个人的QQ
@@ -172,7 +171,7 @@ async def setAvailable_handle(event: Event, bot: Bot):
         await bot.call_api("send_group_msg", message=f"[CQ:at,qq={event.get_user_id()}]抱歉，您没有足够权限", group_id=int(event.group_id), auto_escape=False)
 
 
-add_manager = on_command("addSetuManager", permission=SUPERUSER)
+add_manager = on_command("addSetuManager")
 
 
 @add_manager.handle()
@@ -181,8 +180,8 @@ async def add_manager_handle(event: Event, bot: Bot):
     user_id = event.get_user_id()
     if user_id in permission["supermanager"]:
         text = message_to_qq(event.raw_message)
-        if text:
-            permission["setu_managers"].append(text)
+        if text not in permission["setu_managers"].keys():
+            permission["setu_managers"][text] = "1"
             with open(permission_file, 'w', encoding='utf-8') as f:
                 json.dump(permission, fp=f, indent=4, ensure_ascii=False)
 
@@ -199,8 +198,8 @@ async def remove_manager_handle(event: Event, bot: Bot):
     user_id = event.get_user_id()
     if user_id in permission["supermanager"]:
         text = message_to_qq(event.raw_message)
-        if text:
-            del permission["setu_managers"][permission["setu_managers"].index(str(text))]
+        if text in permission["setu_managers"].keys():
+            del permission["setu_managers"][text]
             with open(permission_file, 'w', encoding='utf-8') as f:
                 json.dump(permission, fp=f, indent=4, ensure_ascii=False)
 
