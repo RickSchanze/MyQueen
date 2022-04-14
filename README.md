@@ -41,7 +41,7 @@ MyQueen（麦昆）是一个基于 nonebot 的机器人，支持 OneBot 接口�
 注意:涩图管理员可以对每一个群使用这两条命令！              
 #### 超级管理员
 除过拥有涩图管理员和复读管理员的命令外，还拥有：                          
-  **addRepeatManager[@群成员]** 将该成员设为复读管理员                           
+  ~addRepeatManager[@群成员]~ 将该成员设为复读管理员                           
   **removeRepeatManager[@群成员]** 移除该成员的复读管理员资格                  
   **addSetuManager[@群成员]** 将该成员设为涩图管理员                         
   **removeRepeatManager[@群成员]** 移除该成员的涩图管理员资格                            
