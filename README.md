@@ -55,5 +55,6 @@ MyQueen（麦昆）是一个基于 nonebot 的机器人，支持 OneBot 接口�
   
 ### 后记
 你不可以将麦昆用作商业用途，但是你可以任意修改麦昆的源码并让她成为你真正的机器人                                       
-[nonebot](https://nb2.baka.icu/)
+[nonebot](https://nb2.baka.icu/)              
 [cqhttp](https://docs.go-cqhttp.org/)
+欢迎加QQ群`947080238`来找我玩！
