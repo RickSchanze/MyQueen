@@ -180,8 +180,8 @@ async def add_manager_handle(event: Event, bot: Bot):
     user_id = event.get_user_id()
     if user_id in permission["supermanager"]:
         text = message_to_qq(event.raw_message)
-        if text not in permission["setu_managers"].keys():
-            permission["setu_managers"][text] = "1"
+        if text not in permission["setu_managers"]:
+            permission["setu_managers"].append(text)
             with open(permission_file, 'w', encoding='utf-8') as f:
                 json.dump(permission, fp=f, indent=4, ensure_ascii=False)
 
@@ -198,8 +198,8 @@ async def remove_manager_handle(event: Event, bot: Bot):
     user_id = event.get_user_id()
     if user_id in permission["supermanager"]:
         text = message_to_qq(event.raw_message)
-        if text in permission["setu_managers"].keys():
-            del permission["setu_managers"][text]
+        if text in permission["setu_managers"]:
+            del permission["setu_managers"][permission["setu_managers"].index(text)]
             with open(permission_file, 'w', encoding='utf-8') as f:
                 json.dump(permission, fp=f, indent=4, ensure_ascii=False)
 
