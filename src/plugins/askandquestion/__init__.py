@@ -24,19 +24,17 @@ class GlobalDialog:
 
 msg_list = {}
 
-now_path = os.path.dirname(__file__)
+work_path = os.getcwd()
 
-permission_path = os.path.join(now_path, os.path.pardir)
+permission_path = os.path.join(work_path, "src\plugins")
 
 sys.path.append(permission_path)
 
 permission_file = os.path.join(permission_path, "permission.json")
 
-help_path = os.path.join(permission_path, os.path.pardir)
+help_path = os.path.join(work_path, "src\help\help.jpg")
 
-help_path = os.path.join(help_path, "help")
 
-help_path = os.path.join(help_path, "help.jpg")
 
 help_path = help_path.replace("\\", "//")
 
@@ -97,7 +95,7 @@ async def delMsg_handle(event: Event, bot: Bot):
     user_id = event.get_user_id()
     if user_id in permission["words_managers"] or user_id in permission["supermanager"]:
         key = event.raw_message[4:]
-        for item in list(globalDig.values())[2:]:
+        for item in globalDig.values():
             if key in item.keys():
                 item.pop(key)
                 path = os.path.join(os.path.dirname(

@@ -9,11 +9,11 @@ import json
 import os, sys
 from nonebot.plugin import require
 # 变量定义环节
-now_path = os.path.dirname(__file__)
-index_path = os.path.join(now_path, "index.txt")
+work_path = os.getcwd()
+index_path = os.path.join(work_path, "src\plugins\words\index.txt")
 picture = ''
 
-permission_path = os.path.join(now_path, os.path.pardir)
+permission_path = os.path.join(work_path, "src\plugins")
 
 permission_file = os.path.join(permission_path, "permission.json")
 
@@ -87,7 +87,7 @@ async def get_picture_and_save(url, pid):
         async with httpx.AsyncClient() as Client:
             try:
                 response = await Client.get(url, timeout=20)
-                with open(os.path.join(now_path, f"pictures/picture{index}_{pid}.jpg"), "wb") as f:
+                with open(os.path.join(work_path, f"src\plugins\words\pictures\picture{index}_{pid}.jpg"), "wb") as f:
                     f.write(response.content)
                     rtn = index
                     index += 1
@@ -126,7 +126,7 @@ async def setu_hanlde(event, bot):
 作者:{author}
 pid:{pid}''', group_id=int(event.group_id), auto_escape=False)
             picture = f"pictures/picture{picture_index}_{pid}.jpg"
-            picture = os.path.join(now_path, picture)
+            picture = os.path.join(work_path, f"src\plugins\words\{picture}")
             picture = picture.replace("\\", "//")
             await bot.call_api("send_group_msg", message=f"[CQ:image,type=flash,file=file://{picture}]", group_id=int(event.group_id), auto_escape=False)
 
