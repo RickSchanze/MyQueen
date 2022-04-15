@@ -1,3 +1,4 @@
+
 import os
 from nonebot import on_command, on_message
 from nonebot.adapters import Bot, Event
@@ -5,8 +6,6 @@ from nonebot.typing import T_State
 from nonebot.permission import SUPERUSER
 import json
 import sys
-from nonebot.plugin import export
-
 
 
 class GlobalDialog:
@@ -33,10 +32,18 @@ sys.path.append(permission_path)
 
 permission_file = os.path.join(permission_path, "permission.json")
 
+help_path = os.path.join(permission_path, os.path.pardir)
+
+help_path = os.path.join(help_path, "help")
+
+help_path = os.path.join(help_path, "help.jpg")
+
+help_path = help_path.replace("\\", "//")
+
 from permission import permission
 
-globalDig = GlobalDialog().global_msg
 
+globalDig = GlobalDialog().global_msg
 
 
 def message_to_qq(qq):              # 命令后面at人的时候，获取那个人的QQ
@@ -73,7 +80,8 @@ async def remove_manager_handle(event: Event, bot: Bot):
     if str(user_id) in permission["supermanager"]:
         text = message_to_qq(event.raw_message)
         if text in permission["words_managers"]:
-            del permission["words_managers"][permission["words_managers"].index(text)]
+            del permission["words_managers"][permission["words_managers"].index(
+                text)]
             with open(permission_file, 'w', encoding='utf-8') as f:
                 json.dump(permission, fp=f, indent=4, ensure_ascii=False)
 
@@ -106,7 +114,7 @@ help = on_command("help", aliases={"帮助", "使用方法"}, priority=1)
 @help.handle()
 async def help_handle(event: Event, bot: Bot):
     group_id = event.group_id
-    await bot.call_api("send_group_msg", message="[CQ:image,file=file://D://software//QQBotMyQueen//MyQueen//src//help//help.jpg]", group_id=int(group_id), auto_escape=False)
+    await bot.call_api("send_group_msg", message=f"[CQ:image,file=file://{help_path}]", group_id=int(group_id), auto_escape=False)
 
 learning = on_message(priority=20)
 
@@ -159,4 +167,3 @@ async def sick_handle(event: Event, bot: Bot):
     qq = message_to_qq(event.raw_message)
     group_id = event.group_id
     await bot.call_api("send_group_msg", message=f"[CQ:at,qq={qq}]的脚小小的香香的，不像手经常使用来得灵活，但有一种独特的可爱的笨拙，嫩嫩的脚丫光滑细腻，凌莹剔透，看得见皮肤下面细细的血管与指甲之下粉白的月牙。再高冷的女生小脚也是敏感的害羞的，轻轻挠一挠，她就摇身一变成为娇滴滴的女孩，脚丫像是一把钥匙，轻轻掌握它就能打开女孩子的心灵。", group_id=int(group_id), auto_escape=False)
-
