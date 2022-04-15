@@ -18,8 +18,7 @@ MyQueen（麦昆）是一个基于 nonebot 的机器人，支持 OneBot 接口�
 具体内容可以使用 `help` 或 `帮助` 指令查看。                  
 
 ## 注意
-插件[头像表情包](https://github.com/MeetWq/nonebot-plugin-petpet)，[表情包制作](https://github.com/MeetWq/nonebot-plugin-petpet)需要提供图片资源以保证正常运行   
-如果网络不佳，可以前往其github页面下载资源并按照其提示安装。
+插件[头像表情包](https://github.com/MeetWq/nonebot-plugin-petpet)，[表情包制作](https://github.com/MeetWq/nonebot-plugin-petpet)需要提供图片资源以保证正常运行，如果网络不佳，可以前往其github页面下载资源并按照其提示安装。       
 插件[抽签/今日运势](https://github.com/MinatoAquaCrews/nonebot_plugin_fortune)无法通过pip顺利安装，请前往其github页面下载资源并按照其提示安装。
 
 ### 部署
