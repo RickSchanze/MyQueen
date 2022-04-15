@@ -31,7 +31,7 @@ async def morning():
 祝各位群友有一天的好心情！
 
 {text}
-[CQ:image,file={url}]''', group_id=488028052, auto_escape=False)
+[CQ:image,file={url}]''', group_id=894535279, auto_escape=False)
 
 
 @scheduler.scheduled_job("cron", hour="23", minute="30")
@@ -57,4 +57,4 @@ async def evening():
 祝各位晚上有一个好梦！
 
 {text}
-[CQ:image,file={url}]''', group_id=488028052, auto_escape=False)
+[CQ:image,file={url}]''', group_id=894535279, auto_escape=False)
