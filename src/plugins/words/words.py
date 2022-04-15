@@ -1,3 +1,4 @@
+from permission import permission
 import logging
 import re
 from tokenize import group
@@ -6,7 +7,9 @@ from nonebot import on_command, on_keyword
 from nonebot.adapters import Bot, Event, Message
 from nonebot.permission import SUPERUSER
 import json
-import os, sys
+import nonebot
+import os
+import sys
 from nonebot.plugin import require
 # 变量定义环节
 work_path = os.getcwd()
@@ -19,11 +22,8 @@ permission_file = os.path.join(permission_path, "permission.json")
 
 sys.path.append(permission_path)
 
-from permission import permission
-
 
 # 读取权限文件
-
 
 
 def message_to_qq(qq):              # 命令后面at人的时候，获取那个人的QQ
@@ -103,41 +103,42 @@ async def get_picture_and_save(url, pid):
     由于使用的API不同，所以需要分别判断
 '''
 setu = on_command("来张涩图", aliases={"涩图", "来份涩图"}, priority=1)
-notsetu = on_command("来张好看的", aliases={"麦昆来张好看的"}, priority=1)
 
 
-@notsetu.handle()
+
 @setu.handle()
 async def setu_hanlde(event, bot):
-    if event.raw_message == "来张涩图" or event.raw_message == "涩图" or event.raw_message == "来份涩图":
-        # 检测涩图功能是否可用
-        setuAvailable = False
-        if str(event.group_id) in permission["groupSetuAvailable"].keys():
-            setuAvailable = permission["groupSetuAvailable"][str(
-                event.group_id)]
-        if setuAvailable:
-            # 检测是否有涩涩资格
-            picture_information = await get_picture_informatin(urls[0])
-            picture_index = await get_picture_and_save(picture_information["url"], picture_information["pid"])
-            title = picture_information["title"]
-            author = picture_information["author"]
-            pid = picture_information["pid"]
-            await bot.call_api("send_group_msg", message=f'''作品名:{title}
+    # 检测涩图功能是否可用
+    setuAvailable = False
+    if str(event.group_id) in permission["groupSetuAvailable"].keys():
+        setuAvailable = permission["groupSetuAvailable"][str(
+            event.group_id)]
+    if setuAvailable:
+        # 检测是否有涩涩资格
+        picture_information = await get_picture_informatin(urls[0])
+        picture_index = await get_picture_and_save(picture_information["url"], picture_information["pid"])
+        title = picture_information["title"]
+        author = picture_information["author"]
+        pid = picture_information["pid"]
+        await bot.call_api("send_group_msg", message=f'''作品名:{title}
 作者:{author}
 pid:{pid}''', group_id=int(event.group_id), auto_escape=False)
-            picture = f"pictures/picture{picture_index}_{pid}.jpg"
-            picture = os.path.join(work_path, f"src\plugins\words\{picture}")
-            picture = picture.replace("\\", "//")
-            await bot.call_api("send_group_msg", message=f"[CQ:image,type=flash,file=file://{picture}]", group_id=int(event.group_id), auto_escape=False)
+        picture = f"pictures/picture{picture_index}_{pid}.jpg"
+        picture = os.path.join(work_path, f"src\plugins\words\{picture}")
+        picture = picture.replace("\\", "//")
+        await bot.call_api("send_group_msg", message=f"[CQ:image,type=flash,file=file://{picture}]", group_id=int(event.group_id), auto_escape=False)
 
-        else:
-            await bot.call_api("send_group_msg", message="本群涩图功能已关闭！", group_id=int(event.group_id), auto_escape=False)
-    elif event.raw_message == "来张好看的" or event.raw_message == "麦昆来张好看的":    # 非涩图API处理
-        async with httpx.AsyncClient() as Client:
-            response = await Client.get(urls[1])
-            response = response.text
-            aUrl = re.search('src="(.*?)"', response, re.S)
-            await bot.call_api("send_group_msg", message=f"[CQ:image,file=http:{aUrl.group(1)}]", group_id=int(event.group_id), auto_escape=False)
+    else:
+        await bot.call_api("send_group_msg", message="本群涩图功能已关闭！", group_id=int(event.group_id), auto_escape=False)
+
+notsetu = on_command("来张好看的", aliases={"麦昆来张好看的"}, priority=1)
+@notsetu.handle()
+async def nowsetu_handle(event, bot):
+    async with httpx.AsyncClient() as Client:
+        response = await Client.get(urls[1])
+        response = response.text
+        aUrl = re.search('src="(.*?)"', response, re.S)
+        await bot.call_api("send_group_msg", message=f"[CQ:image,file=http:{aUrl.group(1)}]", group_id=int(event.group_id), auto_escape=False)
 
 setAvailableTrue = on_command("setSetuAvailable:True")
 
@@ -199,7 +200,8 @@ async def remove_manager_handle(event: Event, bot: Bot):
     if user_id in permission["supermanager"]:
         text = message_to_qq(event.raw_message)
         if text in permission["setu_managers"]:
-            del permission["setu_managers"][permission["setu_managers"].index(text)]
+            del permission["setu_managers"][permission["setu_managers"].index(
+                text)]
             with open(permission_file, 'w', encoding='utf-8') as f:
                 json.dump(permission, fp=f, indent=4, ensure_ascii=False)
 

@@ -1,3 +1,7 @@
 {
-    "supermanager": ["Your QQ number", "If you want to add another supermanager, put his QQ number here"]      
+    "supermanager": [
+        "put your QQ number here",
+        "If you want to add another supermanager, put his QQ number here"
+    ]
+
 }
