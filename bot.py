@@ -1,19 +1,14 @@
+'''
+Author: zh (RickSchanze) (帝皇の惊)
+Date: 2022-04-30 18:16:57
+Description: 
+LastEditTime: 2022-05-10 13:22:59
+'''
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import nonebot
 from nonebot.adapters.onebot.v11 import Adapter as ONEBOT_V11Adapter
-
-# Custom your logger
-# 
-# from nonebot.log import logger, default_format
-# logger.add("error.log",
-#            rotation="00:00",
-#            diagnose=False,
-#            level="ERROR",
-#            format=default_format)
-
-# You can pass some keyword args config to init function
 nonebot.init()
 app = nonebot.get_asgi()
 
@@ -28,20 +23,14 @@ nonebot.load_plugin("nonebot_plugin_wordcloud")
 nonebot.load_plugin("nonebot_plugin_fortune")
 nonebot.load_plugin("nonebot_plugin_petpet")
 nonebot.load_plugin("nonebot_plugin_memes")
+nonebot.load_plugin("nonebot_plugin_code")
+nonebot.load_plugin("nonebot_plugin_simplemusic")
 nonebot.load_plugins("src\\plugins\\askandquestion")
-
-
-
-# Please DO NOT modify this file unless you know what you are doing!
-# As an alternative, you should use command `nb` or modify `pyproject.toml` to load plugins
-
-
-# Modify some config / config depends on loaded configs
-# 
-# config = driver.config
-# do something...
+nonebot.load_plugins("src\\plugins\\words")
+nonebot.load_plugins("src\\plugins\\timedTask")
 
 
 if __name__ == "__main__":
-    nonebot.logger.warning("Always use `nb run` to start the bot instead of manually running!")
+    nonebot.logger.warning(
+        "Always use `nb run` to start the bot instead of manually running!")
     nonebot.run(app="__mp_main__:app")

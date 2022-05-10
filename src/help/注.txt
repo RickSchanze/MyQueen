@@ -1,0 +1,2 @@
+文件里提交BUG功能是直接提交给源代码提供者的，如果你想改成你
+那么请将MyQueen/src/plugins/timedTask/__init__.py中第224行的user_id改为你的QQ号
